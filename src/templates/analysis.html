@@ -1,0 +1,15 @@
+<div class="tooltip-container"></div>
+
+<div class="container">
+
+	<div class="parliament">
+		<div class="js-bills"></div>
+		<ul class="sessions">
+			{{~it.sessions :session:i}}
+			<li class="session" style="height: {{=session.height}}px">
+				<h3>{{=session.name}}</h3>
+			</li>
+			{{~}}
+		</ul>
+	</div>
+</div>

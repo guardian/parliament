@@ -1,0 +1,137 @@
+@import 'font';
+
+.container {
+	max-width: 1300px;
+	box-sizing: border-box;
+	margin: auto;
+	position: relative;
+	padding: 24px 20px;
+	background: white;
+}
+
+.parliament {
+	padding: 0 20px;
+	position: relative;
+}
+
+.sessions {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.session {
+	height: 300px;
+	border-top: 1px solid #bdbdbd;
+	h3 {
+		@include fs-headline(3);
+	}
+}
+
+.bills {
+    margin-left: 140px;
+    position: relative;
+}
+
+.bill {
+	position: absolute;
+	width: 10px;
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		height: 100%;
+		border-left: 1px solid #ccc;
+		z-index: 1;
+		left: 3px;
+		pointer-events: none;
+	}
+
+	&:hover:before {
+		border-color: black;
+	}
+
+	> a {
+		display: block;
+		width: 100%;
+		height: 100%;
+
+	}
+}
+.bills, .bill__stages {
+	list-style-type: none;
+	padding: 0;
+}
+
+.bill__stage {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	text-indent: -9999px;
+	border-radius: 50%;
+	border: 1px solid #333;
+	width: 6px;
+	height: 6px;
+	background: #767676;
+
+	&[stage-house="House of Commons"] {
+		background: #2B6D54;
+	}
+	&[stage-house="House of Lords"] {
+		background: #B12D32;
+	}
+
+	&[stage-name="Royal Assent"] {
+		background-color: #6F4199;
+	}
+
+	&:first-child {
+		background-color: grey;
+	}
+}
+
+.tooltip {
+	position: absolute;
+	max-width: 400px;
+	z-index: 3;
+	background: white;
+    padding: 6px 10px;
+    border: 1px solid #dfdfdf;
+    // border-radius: 4px;
+	font-size: 13px;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.05);
+	@include fs-textSans(4);
+   	ul {
+   		list-style-type: none;
+   		padding: 0;
+   		margin: 0;
+   		text-indent: 0;
+	}
+	h4 {
+		@include fs-bodyHeading(4);
+		margin: 3px 0;
+		margin-bottom: 9px;
+		font-size: 16px;
+		line-height: 22px;
+	}
+  	transition: visibility 0s linear 0.2s,opacity 0.2s linear;
+	&[hide] {
+		visibility: hidden;
+		opacity: 0;
+	}
+
+}
+
+.tooltip__name {
+	@include fs-bodyHeading(3);
+}
+.tooltip__type {
+	@include fs-textSans(4);
+	font-size: 15px;
+	color: #767676;
+	margin: 3px 0;
+}
+.tooltip__date {
+    display: inline-block;
+    width: 85px;
+}

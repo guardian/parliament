@@ -1,0 +1,53 @@
+<div class="tooltip-container"></div>
+
+<div class="container">
+
+	<div class="session-toggles">
+		<h3>Session</h3>
+		<ul>
+		{{~it.sessions :session:i}}
+			<li class="session-toggle">
+				<label>
+					<input type="radio" name="session" value="{{=session}}" {{? i === 0 }} checked {{?}}>
+					<div>{{=session}}</div>
+				</label>
+			</li>
+		{{~}}
+
+		</ul>
+	</div>
+
+	<div class="type-filters">
+		<h3 class="js-toggle-descriptions">Bill types
+		<span class="type-filters__open">?</span>
+		<span class="type-filters__close">&times;</span>
+		</h3>
+		<span class="type-filters__close-message"><span>&#x2190;</span> Click to close</span>
+		<ul>
+			{{~it.types :type:i}}
+			<li class="type-filter">
+				<label>
+					<input type="checkbox" name="{{=type.name}}" {{? type.default }}checked{{?}}>
+					<div>{{=type.name}}</div>
+				</label>
+			</li>
+			{{~}}
+		</ul>
+	</div>
+
+	<div class="type-descriptions">
+		<ul>
+			{{~it.types :type:i}}
+			<li class="type-description">
+				<h3>{{=type.name}}</h3>
+				<p>{{=type.desc}}</p>
+			</li>
+			{{~}}
+		</ul>
+
+	</div>
+
+	<div class="parliament">
+
+	</div>
+</div>

@@ -1,0 +1,88 @@
+{{##def.billTemplate:bill:
+	<li class="bill" billtype="{{=bill.type}}" party="{{=bill.party}}">
+		<a href="{{=bill.homepage}}" target="_blank">{{=bill.name}}</a>
+	</li>
+#}}
+
+<div class="headers">
+	<h3>House of Commons</h3>
+	<h3>House of Lords</h3>
+</div>
+
+<div class="house">
+
+	<div class="flow flow--commons">
+		<span>Bills starting in House of Commons</span>
+		<div class="arrow"><span class="arrow__head">&#x27a4;</span></div>
+	</div>
+
+	<div class="flow flow--lords">
+		<span>Bills starting in House of Lords</span>
+		<div class="arrow"><span class="arrow__head">&#x27a4;</span></div>
+	</div>
+
+	<!-- <div class="flow flow--lords">
+		<div class="arrow"><span class="arrow__head">&#x27a4;</span></div>
+		<span>Starting in House of Lords</span>
+	</div> -->
+
+	<ul class="stages">
+	{{~it.stages :stage:i}}
+		<li class="stage">
+			<h3 class="stage__heading">{{=stage}}</h3>
+			<ul class="commons">
+				{{~it.bills['House of Commons']['House of Commons ' + stage] :bill:j}}
+					{{#def.billTemplate:bill}}
+				{{~}}
+			</ul>
+			<ul class="lords">
+				{{~it.bills['House of Lords']['House of Lords ' + stage] :bill:j}}
+					{{#def.billTemplate:bill}}
+				{{~}}
+			</ul>
+		</li>
+	{{~}}
+</ul>
+
+</div>
+
+<div class="headers">
+	<h3>House of Lords</h3>
+	<h3>House of Commons</h3>
+</div>
+
+<div class="house">
+	<ul class="stages">
+		{{~it.stages :stage:i}}
+			<li class="stage">
+				<h3 class="stage__heading">{{=stage}}</h3>
+				<ul class="commons">
+					{{~it.bills['House of Commons']['House of Lords ' + stage] :bill:j}}
+						{{#def.billTemplate:bill}}
+					{{~}}
+				</ul>
+				<ul class="lords">
+					{{~it.bills['House of Lords']['House of Commons ' + stage] :bill:j}}
+						{{#def.billTemplate:bill}}
+					{{~}}
+				</ul>
+			</li>
+		{{~}}
+	</ul>
+</div>
+
+<ul class="stages">
+	<li class="stage">
+		<h3 class="stage__heading">Royal assent</h3>
+		<ul class="commons">
+			{{~it.bills['House of Commons']['Royal Assent'] :bill:j}}
+				{{#def.billTemplate:bill}}
+			{{~}}
+		</ul>
+		<ul class="lords">
+			{{~it.bills['House of Lords']['Royal Assent'] :bill:j}}
+				{{#def.billTemplate:bill}}
+			{{~}}
+		</ul>
+	</li>
+</ul>

@@ -1,0 +1,20 @@
+<div class="bill">
+	<h3>{{=it.bill.name}}</h3>
+	<ul class="sponsors">
+		{{~it.bill.sponsors :sponsor:i}}
+		<li class="stage">
+			{{=sponsor.name}} ({{=sponsor.party}})
+		</li>
+		{{~}}
+
+	</ul>
+	<ul class="stages">
+		{{~it.bill.stages :stage:i}}
+		<li class="stage">
+			<span class="stage__date">{{=stage.date}}</span>
+			{{=stage.house ? stage.house.split(' ').reverse()[0] + ' ' : ''}}
+			{{=stage.name}}
+		</li>
+		{{~}}
+	</ul>
+</div>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="build/main.css">
+        <style type="text/css">
+          body {
+              background-color: #f7f7f7;
+          }
+        </style>
+        <script src="jspm_packages/system.js"></script>
+        <script src="src/js/config.js"></script>
+        <script type="text/javascript">
+            System.import('src/js/main').then(function(main) {
+              main.init(document.querySelector('.element-interactive'), document);
+            })
+        </script>
+        <title></title>
+    </head>
+    <body>
+
+        <!-- Use the same figure elm as NGW -->
+        <figure class="element-interactive interactive"></figure>
+
+
+        <!-- Simulate boot.js -->
+        <script>
+          // var el = document.querySelector('.interactive');
+          // require = curl;
+          // require(['build/boot.js'], function(app) {
+          //       app.boot(el);
+          // });
+        </script>
+    <body>
+</html>

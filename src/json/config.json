@@ -1,0 +1,20 @@
+{
+	"stages": [
+		"1st reading",
+		"2nd reading",
+		"Committee stage",
+		"Report stage",
+		"3rd reading"
+	],
+
+	"sessions": ["2015-2016","2014-2015","2013-2014","2012-2013","2010-2012"],
+
+	"types": [
+		{"name": "Government", "default": true, "desc": "Public Bills deal with matters of public policy. Most are introduced to Parliament by the Government. They tend to be general in character and affect everyone. A Public Bill introduced by a Member who is not a minister is known as a Private Member's Bill."},
+		{"name": "Hybrid", "default": true, "desc": "A Hybrid Bill is a Public Bill that affects the private interests of particular individuals or organisations in a different way from the rest of the public."},
+		{"name": "Ballot", "default": false, "desc": "Ballot Bills are a type of Private Members' Bill. Ballot Bills have the best chance of becoming law, as they get priority for the limited amount of debating time available. The names of MPs applying for a Bill are drawn in a ballot held at the start of the beginning of the parliamentary year."},
+		{"name": "HoL Private", "default": false, "desc": "Private Members' Bills are Public Bills introduced by MPs and Lords who are not government ministers. As with other Public Bills their purpose is to change the law as it applies to the general population. A minority of Private Members' Bills become law but, by creating publicity around an issue, they may affect legislation indirectly."},
+		{"name": "Ten Minute Rule", "default": false, "desc": "The ten minute rule allows a brief introductory speech of no more than ten minutes and one of the same length opposing the motion to be made in the House of Commons after question time on Tuesdays and Wednesdays when the House is likely to be full. Not all Ten Minute Rule Bills are printed."},
+		{"name": "Presentation", "default": false, "desc": "A Presentation Bill allows any MP to give notice of his or her intention to present a Bill on any future day. Notice must be in writing and must include the short and long titles. Presentation takes place at the time of Preliminary Business. The MP should be standing behind the Speaker's Chair on the Government side until called by the Speaker."}
+	]
+}

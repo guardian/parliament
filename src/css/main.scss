@@ -1,0 +1,375 @@
+@import 'font';
+
+.container {
+	max-width: 1300px;
+	box-sizing: border-box;
+	margin: auto;
+	position: relative;
+	padding: 24px 20px;
+	background: white;
+}
+
+.headers h3 {
+	width: 50%;
+	float: left;
+	text-align: center;
+	color: #333;
+	box-sizing: border-box;
+	padding: 0 20px;
+	position: relative;
+	z-index: 2;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 12px;
+	&:first-child {
+		text-align: right;
+	}
+	&:nth-child(2) {
+		text-align: left;
+	}
+}
+
+.parliament {
+	padding: 0 20px;
+	.show-type-descriptions & {
+		opacity: 0.2;
+	}
+}
+
+.stages {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-indent: 0;
+	position: relative;
+	background: #fff;
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+		height: 1px;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		top: 0;
+		border-right: 1px solid #dfdfdf;
+		height: 100%;
+		z-index: 1;
+	}
+}
+
+.stage {
+	display: block;
+	clear: both;
+	position: relative;
+	padding: 0;
+	min-height: 32px;
+	margin-bottom: 12px;
+	// background: #fff;
+	&:after {
+		display: block;
+		content: '';
+		clear: both;
+	}
+	// &:nth-child(2n+1) {
+	// 	background: #f7f7f7;
+	// }
+}
+
+.house {
+	position: relative;
+}
+
+.flow {
+    color: #333;
+    @include fs-textSans(3);
+	position: absolute;
+	// left: 0;
+	// top: 200px;
+	top: 80px;
+    transform: rotate(90deg);
+    transform-origin: 0%;
+    z-index: 2;
+    > span {
+    	display: block;
+    	width: 330px;
+    	padding: 0 50px;
+    	box-sizing: border-box;
+    }
+}
+.flow--lords > span {
+	text-align: right;
+}
+
+.flow--lords {
+	right: 0;
+	transform: rotate(-90deg);
+	transform-origin: 100%;
+}
+.arrow {
+    // width: auto;
+    // left: 0;
+    // top: 0;
+    // margin-left: 10px;
+	// z-index: 2;
+	border-top: 1px solid #bdbdbd;
+	color: #767676;
+	display: block;
+	position: relative;
+	top: 2px;
+	z-index: 1;
+	width: calc(100% + 20px);
+	margin-left: -10px;
+}
+.arrow__head {
+    position: absolute;
+    top: -10px;
+    z-index: 1;
+    font-size: 14px;
+    .flow--commons & {
+    	right: -8px;
+    }
+    .flow--lords & {
+		left: 0;
+		transform: rotate(180deg);
+	}
+}
+.stage__heading {
+	@include fs-bodyHeading(2);
+	text-align: center;
+	background: #fff;
+	line-height: 38px;
+	margin: auto;
+	color: #333;
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: 132px;
+	border-radius: 4px;
+	z-index: 2;
+}
+
+.commons {
+	float: left;
+	.bill { float: right; }
+}
+.lords {
+	float: right;
+	.bill { float: left; }
+}
+
+.commons, .lords {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+	width: calc(50% - (132px / 2));
+	box-sizing: border-box;
+	padding: 6px 12px;
+	min-height: 32px;
+}
+
+.tooltip {
+	position: absolute;
+	max-width: 400px;
+	z-index: 3;
+	background: white;
+    padding: 6px 10px;
+    border: 1px solid #dfdfdf;
+    // border-radius: 4px;
+	font-size: 13px;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.05);
+	@include fs-textSans(4);
+   	ul {
+   		list-style-type: none;
+   		padding: 0;
+   		margin: 0;
+   		text-indent: 0;
+	}
+	h4 {
+		@include fs-bodyHeading(4);
+		margin: 3px 0;
+		margin-bottom: 9px;
+		font-size: 16px;
+		line-height: 22px;
+	}
+  	transition: visibility 0s linear 0.2s,opacity 0.2s linear;
+	&[hide] {
+		visibility: hidden;
+		opacity: 0;
+	}
+}
+
+.tooltip__name {
+	@include fs-bodyHeading(3);
+}
+.tooltip__type {
+	@include fs-textSans(4);
+	font-size: 15px;
+	color: #767676;
+	margin: 3px 0;
+}
+.tooltip__date {
+    display: inline-block;
+    width: 85px;
+}
+
+.bill {
+	padding: 3px 5px 3px 0;
+	a {
+		border-radius: 2px;
+		display: block;
+		text-indent: -9999px;
+		border: 1px solid #bdbdbd;
+		background: #f1f1f1;
+		width: 24px;
+		height: 24px;
+	}
+	&:hover {
+		-webkit-filter: brightness(80%);
+	}
+	&.bill--visible {
+		opacity: 0.9 !important;
+	}
+	&:not(.bill--visible) {
+		display: none;
+		opacity: 0.1;
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+}
+
+.bill[party="Conservative"] a { background: #0087DC; border-color: #005B94; }
+.bill[party="Labour"] a { background: #DC241f; border-color: #980400;}
+.bill[party="Green Party"] a { background: #6AB023; border-color: #437312;	}
+.bill[party="undefined"] a { background: #767676; border-color: #555; }
+.bill[party="Liberal Democrat"] a { background: #FDBB30; border-color: #C39024; }
+
+$billTypes: ("Government", "Hybrid", "Ten Minute Rule", "Ballot", "HoL Private", "Presentation");
+
+@each $type in $billTypes {
+	.container[hovertype="#{$type}"] .bill[billtype="#{$type}"] {
+		opacity: 0.5;
+		-webkit-filter: brightness(90%);
+		a {
+			border-color: #333;
+		}
+	}
+}
+
+
+.stage--current {
+	font-weight: bold;
+}
+
+.type-filters {
+	h3 {
+		display: inline-block;
+		margin-right: 20px;
+		cursor: pointer;
+		line-height: 22px;
+		border-bottom: 1px solid transparent;
+		&:hover {
+			border-bottom: 1px solid #333;
+			.type-filters__open { color: #333; }
+		}
+	}
+	ul {
+		padding: 0;
+		display: inline-block;
+		.show-type-descriptions & { display: none; }
+	}
+
+	.type-filters__open,
+	.type-filters__close {
+		margin-left: 6px;
+		font-weight: normal;
+	}
+	.type-filters__open { color: #999; }
+	.type-filters__close { display: none; }
+	.show-type-descriptions & {
+	    .type-filters__open { display: none; }
+	    .type-filters__close{ display: inline; }
+	}
+	.type-filters__close-message {
+		@include fs-textSans(2);
+		display: none;
+		> span {
+		    font-size: 20px;
+		    position: relative;
+		    top: 1px;
+		}
+		.show-type-descriptions & { display: inline; }
+	}
+}
+
+.session-toggles {
+	h3 { display: inline; }
+	ul { display: inline; }
+	display: inline;
+}
+
+.type-filter, .session-toggle {
+	position: relative;
+	margin: 0;
+	margin-right: 10px;
+	cursor: pointer;
+	list-style-type: none;
+	padding: 0;
+	display: inline-block;
+
+	&:hover {
+		-webkit-filter: brightness(90%);
+	}
+	@include fs-textSans(1);
+	input {
+		display: none;
+		+ div {
+			cursor: pointer;
+			display: inline-block;
+			padding: 4px 10px;
+			border-radius: 1000px;
+			background: #eaeaea;
+			line-height: 16px;
+		}
+		&:checked + div {
+			background: #005689;
+			color: white;
+		}
+	}
+}
+
+.type-descriptions {
+    position: absolute;
+    width: calc(100% - 40px);
+    left: 0;
+    z-index: 8;
+    background: rgba(255,255,255,0.75);
+    padding: 12px 0;
+    margin: 0 20px;
+    display: none;
+    border-top: 1px solid #dfdfdf;
+    box-sizing: border-box;
+
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		max-width: 620px;
+	}
+
+	.show-type-descriptions & {
+		display: block;
+	}
+
+	h3 {
+		@include fs-bodyHeading(2);
+		margin: 0;
+	}
+	p {
+		@include fs-bodyCopy(2);
+	}
+}

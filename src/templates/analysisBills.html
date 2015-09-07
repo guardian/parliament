@@ -1,0 +1,18 @@
+<ul class="bills">
+{{~it.bills :bill:i}}
+	<li class="bill" billtype="{{=bill.type}}" party="{{=bill.party}}" bill-name="{{=bill.name}}"
+	style="top: {{=bill.offset}}px; left: {{=bill.column * 20}}px; height: {{=bill.height}}px;">
+		<a href="{{=bill.homepage}}" target="_blank">
+			<ul class="bill__stages">
+				{{~bill.billStages :stage:j}}
+				<li class="bill__stage" style="top: {{=stage.offset}}px;"
+				stage-name="{{=stage.name}}" stage-house="{{=stage.house}}">
+					{{=stage.date}}
+				</li>
+				{{~}}
+			</ul>
+		</a>
+		<!-- <a href="{{=bill.homepage}}" target="_blank">{{=bill.name}}</a> -->
+	</li>
+{{~}}
+</ul>
