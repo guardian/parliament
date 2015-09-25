@@ -1,11 +1,16 @@
 System.config({
   baseURL: "/",
   defaultJSExtensions: true,
-  transpiler: "babel",
+  transpiler: "traceur",
   babelOptions: {
     "optional": [
       "runtime",
       "optimisation.modules.system"
+    ]
+  },
+  traceurOptions: {
+    "optional": [
+      "runtime"
     ]
   },
   paths: {
@@ -18,13 +23,18 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.20",
     "core-js": "npm:core-js@1.1.3",
     "ded/bonzo": "github:ded/bonzo@2.0.0",
+    "ded/bowser": "github:ded/bowser@1.0.0",
     "fat/bean": "github:fat/bean@1.0.14",
+    "guardian/iframe-messenger": "github:guardian/iframe-messenger@master",
+    "hammer": "github:hammerjs/hammer.js@2.0.4",
     "json": "github:systemjs/plugin-json@0.1.0",
     "lodash": "npm:lodash@3.10.1",
     "olado/doT": "github:olado/doT@1.0.1",
     "reqwest": "github:ded/reqwest@2.0.3",
     "samsonjs/strftime": "github:samsonjs/strftime@0.9.2",
     "text": "github:systemjs/plugin-text@0.0.2",
+    "traceur": "github:jmcriffey/bower-traceur@0.0.91",
+    "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.91",
     "github:jspm/nodelibs-process@0.1.1": {
       "process": "npm:process@0.10.1"
     },

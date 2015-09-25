@@ -7,6 +7,8 @@ import bonzo from 'ded/bonzo'
 import _ from 'lodash'
 import strftime from 'samsonjs/strftime'
 import config from '../json/config.json!json'
+import { Calendar } from './calendar'
+import { Queenspeech } from './queenspeech'
 
 var renderMainTemplate = doT.template(mainTemplate);
 var renderBillsTemplate = doT.template(billsTemplate);
@@ -28,8 +30,7 @@ function tooltipHTML(bill) {
 			<ul>${sponsors}</ul>
 			<h4>Stages</h4>
 			<ul>${stages}</ul>
-		</div>
-	`
+		</div>`
 }
 
 class App {
@@ -43,21 +44,37 @@ class App {
 			descriptionToggle: el.querySelector('.js-toggle-descriptions'),
 			typeDescriptions: el.querySelector('.type-descriptions'),
 			parliamentEl: el.querySelector('.parliament'),
-			sessionToggles: el.querySelector('.session-toggles')
+			sessionToggles: el.querySelector('.session-toggles'),
+			calendarEl: el.querySelector('.js-calendar'),
+			queenspeechEl: el.querySelector('.queenspeech')
 		}
 		this.initEventBindings();
 		this.preprocessBills(bills);
 		this.renderSession(config.sessions[0]);
 		// this.renderBills(bills);
+		this.renderCalendar();
+		this.renderQueenspeech();
+	}
+
+	renderCalendar() {
+		var now = new Date();
+		var toDate = new Date();
+		toDate.setDate(toDate.getDate() + 6);
+		new Calendar(this.els.calendarEl, now, toDate)
+	}
+
+	renderQueenspeech() {
+		new Queenspeech(this.els.queenspeechEl);
 	}
 
 	preprocessBills(bills) {
 		var now = Date.now();
+		var stageValues = config.stages.map(stage => stage.value);
 		bills.forEach(bill => {
 			var finishedStages = bill.stages.filter(stage => stage.date && Date.parse(stage.date) < now)
 			finishedStages[finishedStages.length - 1].current = true;
 			var currentMajorStage = _.findLast(finishedStages, stage =>
-				config.stages.indexOf(stage.name) !== -1 || stage.name === 'Royal Assent')
+				stageValues.indexOf(stage.name) !== -1 || stage.name === 'Royal Assent')
 			if (currentMajorStage) currentMajorStage.currentMajor = true;
 		})
 		this.billsByName = _(bills).groupBy('name').mapValues(bills => bills[0]).value()
@@ -72,12 +89,13 @@ class App {
 				this.els.tooltipContainer.innerHTML = tooltipHTML(bill);
 				tooltip = this.els.tooltipContainer.children[0];
 
+				var scrollTop = bonzo(document.body).scrollTop();
 				var {width, height} = tooltip.getBoundingClientRect();
 				var offsetX = (evt.clientX / window.innerWidth) > 0.5 ? -10-width : 35;
-				var offsetY = (evt.clientY / window.innerHeight) > 0.5 ? -10-height : 35;
+				var offsetY = (evt.clientY / (window.innerHeight + scrollTop)) > 0.5 ? -10-height : 35;
 				var {top, left} = evt.target.getBoundingClientRect();
 				tooltip.style.left = (left+offsetX) + 'px';
-				tooltip.style.top = (top+offsetY) + 'px';
+				tooltip.style.top = (top+offsetY + scrollTop) + 'px';
 			}
 		})
 

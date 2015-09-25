@@ -1,0 +1,62 @@
+$progressbar-size: 70px;
+
+.queenspeech--fade {
+    > :not(.tooltip-container) {
+        opacity: 0.3;
+    }
+}
+
+.queenspeech__bills {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+.queenspeech__bill {
+	margin-bottom: 3px;
+	color: #333;
+	position: relative;
+	cursor: pointer;
+}
+
+.queenspeech__bill[billid="-1"] {
+	opacity: 0.5;
+	cursor: default;
+}
+
+.queenspeech__bill-name {
+	display: block;
+	margin-left: $progressbar-size + 10px;
+	@include fs-bodyCopy(1);
+}
+
+.progressbar {
+	// display: inline-block;
+	// vertical-align: middle;
+	float: left;
+	width: $progressbar-size;
+	height: 14px;
+	// border: 1px solid #333;
+	background: #dfdfdf;
+	border-radius: 4px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	overflow: hidden;
+	> span {
+		display: inline-block;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: #005689;
+	}
+}
+
+.queenspeech__bill:after {
+    content: '';
+    clear: both;
+    display: block;
+}

@@ -1,33 +1,28 @@
-// import allBills from "../../nice.json!json"
 import doT from 'olado/doT'
-import template from '../templates/bill.html!text'
-import reqwest from 'reqwest'
-// import bean from 'fat/bean'
-// import bonzo from 'ded/bonzo'
-// import _ from 'lodash'
-// import strftime from 'samsonjs/strftime'
-// import config from '../json/analysis.json!json'
+import template from '../templates/billinfo.html!text'
+import strftime from 'samsonjs/strftime'
 
 var renderTemplate = doT.template(template);
 
-class App {
-	constructor(el, bill) {
-		el.innerHTML = renderTemplate({bill})
+export function billHTML(bill) {
+	function find(arr, fn) {
+		for (var i = 0; i < arr.length; i++) {
+			if (fn(arr[i])) return arr[i];
+		}
 	}
+    var stagesByDate = {};
+    bill.stages.forEach(stage => {
+        stagesByDate[stage.date] = stagesByDate[stage.date] || [];
+        stagesByDate[stage.date].push(stage);
+    });
 
-	initEventBindings() {
-	}
+    var dates = Object.keys(stagesByDate).sort((a,b) =>
+        !a ? 100 : !b ? -100 : a > b ? 1 : -1 // sort TBA (no date) to bottom
+    );
 
-	transformBills(bills) {
-	}
-}
+    var niceDate = date => date ? strftime('%e %B %Y', new Date(date)) : 'TBA'
+    var royalAssent = find(bill.stages,stage => stage.name === "Royal Assent")
+    var finalDate = royalAssent ? royalAssent.date : undefined;
 
-export function init(el, context) {
-	var billId = /id=(\d+)/.exec(window.location.search);
-	if (billId) {
-		reqwest({ url: `data/bills/${billId[1]}.json`, type: 'json', contentType: 'application/json' })
-			.then(bill => new App(el, bill))
-	} else {
-		throw new Error('missing bill id in query string')
-	}
+    return renderTemplate({bill, dates, stagesByDate, niceDate, finalDate});
 }

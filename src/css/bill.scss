@@ -1,28 +1,15 @@
 @import 'font';
+@import 'mq';
+@import '_billinfo';
 
-html, body {
-	padding: 0;
-	margin: 0;
+.bill-info {
+	position: static !important;
+	padding: 0 10px;
+    border-top: 1px solid #4bc6df;
+    background: #f7f7f7;
+    max-width: 320px;
 }
 
-ul {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-}
-
-.sponsors {
-	@include fs-textSans(4);
-	margin-bottom: 12px;
-}
-
-.bill {
-	@include fs-textSans(4);
-	h3 {
-		@include fs-bodyHeading(4);
-	}
-	.stage__date {
-		display: inline-block;
-		width: 85px;
-	}
+.bill-info__close {
+	display: none;
 }

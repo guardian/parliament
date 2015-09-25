@@ -1,0 +1,163 @@
+@import 'font';
+
+html {
+	@include fs-bodyCopy(1);
+}
+
+iframe {
+	border: 0;
+}
+
+.queenspeech {
+	iframe {
+		width: 620px;
+	}
+}
+
+.embed-link {
+	display: block;
+	color: #005689;
+	margin: 12px 0;
+	max-width: 620px;
+	&:before {
+		content: 'Embed link: ';
+		display: inline-block;
+		color: #333;
+		margin-right: 5px;
+		@include fs-bodyHeading(1);
+	}
+	&:hover {
+		background-color: #f1f1f1;
+	}
+	.state &, .bills & {
+		margin-bottom: 0;
+	}
+}
+
+.bills {
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		max-height: 300px;
+		max-width: 620px;
+		overflow-y: scroll;
+		border-top: 1px solid #dfdfdf;
+		border-bottom: 1px solid #dfdfdf;
+	}
+}
+
+.bill {
+	cursor: pointer;
+	&:hover {
+		background-color: #f1f1f1;
+	}
+
+	&.bill--selected {
+	    background-color: #d2ffff;
+	}
+
+}
+
+.bill__session {
+	padding: 2px;
+	background-color: #999;
+	color: #f1f1f1;
+	border-radius: 4px;
+	margin-right: 5px;
+	&[session="2015-2016"] {
+		background-color: #005689;
+	}
+}
+
+.bill-preview-container {
+	min-height: 100px;
+	width: 300px;
+	position: relative;
+	padding-top: 24px;
+
+	&[loading]:before {
+	    position: absolute;
+	    content: 'loading...';
+	    left: 0;
+	    right: 0;
+	    top: 0;
+	    bottom: 0;
+	    margin: auto;
+	    width: 100%;
+	    text-align: center;
+	    height: 18px;
+		z-index: 1;
+	}
+
+	iframe {
+		position: relative;
+		z-index: 2;
+	}
+
+}
+
+.state {
+	iframe {
+		width: 620px;
+	}
+}
+
+.tabs {
+	max-width: 620px;
+	margin-bottom: 24px;
+	border-bottom: 1px solid #bdbdbd;
+
+	input {
+		display: none;
+	}
+
+	label {
+		@include fs-bodyHeading(4);
+		width: 33%;
+		display: inline-block;
+		color: #bdbdbd;
+		cursor: pointer;
+		text-align: center;
+		// background-color: #dfdfdf;
+		// border-radius: 24px;
+		// border-bottom-right-radius: 0;
+		// border-bottom-left-radius: 0;
+		&:hover {
+			color: #333 !important;
+		}
+	}
+
+	input:checked + span {
+		color: #333;
+	}
+}
+
+.state-date {
+	h3 {
+		display: inline-block;
+		margin-right: 10px;
+	}
+	label {
+		@include fs-bodyCopy(1);
+		cursor: pointer;
+		color: #333;
+		&:hover {
+			color: black;
+		}
+	}
+	input {
+		margin: 0 5px;
+		vertical-align: middle;
+	}
+}
+
+.bills {
+	input[name="bill-filter"] {
+		@include fs-bodyCopy(1);
+		padding: 3px 10px;
+		border-radius: 20px;
+		border: 1px solid #dfdfdf;
+		margin: 12px 0;
+	}
+}

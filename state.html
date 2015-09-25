@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="build/state.css">
+        <style type="text/css">
+          body, html {
+              background-color: #fff;
+              margin: 0;
+              padding: 0;
+          }
+          body {
+            overflow: hidden;
+          }
+        </style>
+        <script src="jspm_packages/system.js"></script>
+        <script src="src/js/config.js"></script>
+        <script src="build/state.js"></script>
+        <title></title>
+    </head>
+    <body>
+      <h2 class="main-header">State of parliament <span id="on-date"></span></h2>
+      <div id="state-container"></div>
+
+        <script>
+            System.import('src/js/state').then(function(main) {
+              main.init();
+            })
+        </script>
+    </body>
+</html>

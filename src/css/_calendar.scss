@@ -1,0 +1,51 @@
+.calendar {
+	color: #333;
+}
+.calendar__bills,
+.calendar__stages {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.calendar__date {
+	@include fs-bodyHeading(2);
+    border-top: 1px solid #4bc6df;
+    padding-top: 3px;
+    margin-bottom: 6px;
+    margin-top: 0;
+}
+.calendar__bills {
+	@include fs-textSans(4);
+}
+.calendar__bill {
+	margin-left: 10px;
+	margin-bottom: 3px;
+}
+.calendar__bill__name {
+	@include fs-bodyCopy(1);
+	font-weight: normal;
+	margin: 0 0 6px 70px;
+	display: block;
+	a {
+		color: #333;
+		text-decoration: none;
+	}
+}
+
+.calendar__bill__house {
+	float: left;
+	line-height: 20px;
+}
+
+.calendar__bill__house--commons {
+	color: #2B6D54;
+}
+.calendar__bill__house--lords {
+	color: #B12D32;
+}
+
+.calendar__stages {
+	margin-left: 20px;
+	display: none;
+}

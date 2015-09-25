@@ -8,13 +8,22 @@
 		{{~}}
 
 	</ul>
-	<ul class="stages">
-		{{~it.bill.stages :stage:i}}
-		<li class="stage">
-			<span class="stage__date">{{=stage.date}}</span>
-			{{=stage.house ? stage.house.split(' ').reverse()[0] + ' ' : ''}}
-			{{=stage.name}}
+	<ul class="dates">
+		{{~it.dates :date:i}}
+		<li class="date {{? date === it.finalDate}}date--final{{?}}">
+			<span class="date__label">{{=it.niceDate(date)}}</span>
+			<ul class="stages">
+				{{~it.stagesByDate[date] :stage:j}}
+				<li class="stage">
+					{{=stage.house ? stage.house.split(' ').reverse()[0] + ' ' : ''}}
+					{{=stage.name}}
+				</li>
+				{{~}}
+			</ul>
 		</li>
 		{{~}}
 	</ul>
+
+	<!-- <a class="cta" href="/" target="_blank">See full parliament &raquo;</a> -->
+	<a class="cta" href="{{=it.bill.homepage}}" target="_blank">See on parliament.uk &raquo;</a>
 </div>

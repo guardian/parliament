@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../build/calendar.css">
+        <style type="text/css">
+          body {
+              background-color: #f7f7f7;
+          }
+          html, body, .element-interactive {
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+        <script src="//interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js" async></script>
+        <script src="../jspm_packages/system.js"></script>
+        <script src="../src/js/config.js"></script>
+        <script>
+            var fromDate = /from=(\d{4}\-\d{2}\-\d{2})/.exec(window.location.search);
+            var toDate = /to=(\d{4}\-\d{2}\-\d{2})/.exec(window.location.search);
+            if (fromDate && toDate) {
+              System.import('src/js/calendar').then(function(main) {
+                  new main.Calendar(document.body, new Date(fromDate[1]), new Date(toDate[1]))
+              });
+            } else {
+              throw new Error('Missing from/to in YYYY-MM-DD format');
+            }
+        </script>
+        <title></title>
+    </head>
+    <body>
+    </body>
+</html>

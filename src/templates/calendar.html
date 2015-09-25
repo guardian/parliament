@@ -1,0 +1,21 @@
+<div class="calendar">
+    {{~it.dates :date:i}}
+    <h3 class="calendar__date">{{=it.niceDate(date)}}</h3>
+        <ul class="calendar__bills">
+        {{~it.calendar[date] :bill:j}}
+        	<li class="calendar__bill">
+                <span class="calendar__bill__house calendar__bill__house--{{=bill.house.toLowerCase()}}">{{=bill.house}}</span>
+        		<span class="calendar__bill__name"><a href="../../embed/bill.html?id={{=bill.bill.id}}">{{=bill.bill.name}}</a></span>
+                <ul class="calendar__stages">
+                    {{~bill.stages :stage:k}}
+                    <li class="calendar__stage">
+                        {{=stage.house ? stage.house.split(' ').reverse()[0] + ' ' : ''}}
+                        {{=stage.name}}
+                    </li>
+                    {{~}}
+                </ul>
+        	</li>
+        {{~}}
+        </ul>
+    {{~}}
+</div>

@@ -1,0 +1,13 @@
+<h2>Bills</h2>
+<ul>
+	{{~it.bills :bill:i}}
+	<li class="bill" billid="{{=bill.id}}">
+		<span class="bill__session" session="{{=bill.session}}">{{=bill.session}}</span>
+		<span class="bill__name">{{=bill.name}}</span>
+	</li>
+	{{~}}
+</ul>
+
+<a id="bill-embed-link" target="_blank"></a>
+
+<iframe id="bill-preview"></iframe>

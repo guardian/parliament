@@ -1,10 +1,10 @@
 {
 	"stages": [
-		"1st reading",
-		"2nd reading",
-		"Committee stage",
-		"Report stage",
-		"3rd reading"
+		{"label": "1st reading", "value": "1st reading"},
+		{"label": "2nd reading", "value": "2nd reading"},
+		{"label": "Committee", "value": "Committee stage"},
+		{"label": "Report", "value": "Report stage"},
+		{"label": "3rd reading", "value": "3rd reading"}
 	],
 
 	"sessions": ["2015-2016","2014-2015","2013-2014","2012-2013","2010-2012"],

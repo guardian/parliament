@@ -1,0 +1,42 @@
+<div class="tabs">
+	<label><input type="radio" name="tab" value="state" checked><span>State</span></label>
+	<label><input type="radio" name="tab" value="bills"><span>Bills</span></label>
+	<label><input type="radio" name="tab" value="queenspeech"><span>Queenspeech</span></label>
+</div>
+
+<div id="state" class="state">
+	<a class="embed-link" id="state-embed-link" target="_blank"></a>
+
+	<div class="state-date">
+		<h3>Date</h3>
+		<label>Auto updating<input type="radio" name="state-date-type" checked value="autoupdate"></label>
+		<label>Freeze<input type="radio" name="state-date-type" value="freeze"></label>
+		<input type="date" disabled name="state-date">
+	</div>
+	<iframe id="state-preview"></iframe>
+</div>
+
+<div id="bills" class="bills" style="display:none">
+
+	<a class="embed-link" id="bill-embed-link" target="_blank">Select a bill below</a>
+
+	<input type="text" placeholder="Search" name="bill-filter">
+	<ul>
+		{{~it.bills :bill:i}}
+		<li class="bill" billid="{{=bill.id}}">
+			<span class="bill__session" session="{{=bill.session}}">{{=bill.session}}</span>
+			<span class="bill__name">{{=bill.name}}</span>
+		</li>
+		{{~}}
+	</ul>
+
+	<div class="bill-preview-container">
+		<iframe id="bill-preview"></iframe>
+	</div>
+
+</div>
+
+<div id="queenspeech" class="queenspeech" style="display:none">
+	<a class="embed-link"  href="{{=it.queenspeechUrl}}" target="_blank">{{=it.queenspeechUrl}}</a>
+	<iframe src="{{=it.queenspeechUrl}}"></iframe>
+</div>

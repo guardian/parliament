@@ -1,5 +1,5 @@
 {{##def.billTemplate:bill:
-	<li class="bill" billtype="{{=bill.type}}" party="{{=bill.party}}">
+	<li class="bill" billid="{{=bill.id}}" billtype="{{=bill.type}}" party="{{=bill.party}}">
 		<a href="{{=bill.homepage}}" target="_blank">{{=bill.name}}</a>
 	</li>
 #}}
@@ -29,14 +29,14 @@
 	<ul class="stages">
 	{{~it.stages :stage:i}}
 		<li class="stage">
-			<h3 class="stage__heading">{{=stage}}</h3>
+			<h3 class="stage__heading">{{=stage.label}}</h3>
 			<ul class="commons">
-				{{~it.bills['House of Commons']['House of Commons ' + stage] :bill:j}}
+				{{~it.bills['House of Commons']['House of Commons ' + stage.value] :bill:j}}
 					{{#def.billTemplate:bill}}
 				{{~}}
 			</ul>
 			<ul class="lords">
-				{{~it.bills['House of Lords']['House of Lords ' + stage] :bill:j}}
+				{{~it.bills['House of Lords']['House of Lords ' + stage.value] :bill:j}}
 					{{#def.billTemplate:bill}}
 				{{~}}
 			</ul>
@@ -55,14 +55,14 @@
 	<ul class="stages">
 		{{~it.stages :stage:i}}
 			<li class="stage">
-				<h3 class="stage__heading">{{=stage}}</h3>
+				<h3 class="stage__heading">{{=stage.label}}</h3>
 				<ul class="commons">
-					{{~it.bills['House of Commons']['House of Lords ' + stage] :bill:j}}
+					{{~it.bills['House of Commons']['House of Lords ' + stage.value] :bill:j}}
 						{{#def.billTemplate:bill}}
 					{{~}}
 				</ul>
 				<ul class="lords">
-					{{~it.bills['House of Lords']['House of Commons ' + stage] :bill:j}}
+					{{~it.bills['House of Lords']['House of Commons ' + stage.value] :bill:j}}
 						{{#def.billTemplate:bill}}
 					{{~}}
 				</ul>

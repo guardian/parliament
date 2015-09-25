@@ -1,0 +1,34 @@
+ <div class="bill-info">
+
+ 	<button class="bill-info__close">close</button>
+
+	<h3 class="bill-info__title">{{=it.bill.name}}</h3>
+	<p class="bill-info__type">{{=it.bill.type}} bill</p>
+	<ul class="bill-info__sponsors">
+		{{~it.bill.sponsors :sponsor:i}}
+		<li>
+			{{=sponsor.name}} {{? sponsor.party}}({{=sponsor.party}}){{?}}
+		</li>
+		{{~}}
+
+	</ul>
+	<ul class="bill-info__dates">
+		{{~it.dates :date:i}}
+		<li class="bill-info__date {{? date === it.finalDate}}bill-info__date--final{{?}}">
+			<span>{{=it.niceDate(date)}}</span>
+			<ul class="bill-info__stages">
+				{{~it.stagesByDate[date] :stage:j}}
+				<li class="bill-info__stage">
+					{{=stage.house ? stage.house.split(' ').reverse()[0] + ' ' : ''}}
+					{{=stage.name}}
+				</li>
+				{{~}}
+			</ul>
+		</li>
+		{{~}}
+	</ul>
+
+	<!-- <a class="cta" href="/" target="_blank">See full parliament &raquo;</a> -->
+	<p class="bill-info__peak-msg">Click bill for more info</p>
+	<a class="bill-info__cta" href="{{=it.bill.homepage}}" target="_blank">See on parliament.uk &raquo;</a>
+</div>

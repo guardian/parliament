@@ -1,4 +1,6 @@
 @import 'font';
+@import '_calendar';
+@import '_queenspeech';
 
 .container {
 	max-width: 1300px;
@@ -7,41 +9,91 @@
 	position: relative;
 	padding: 24px 20px;
 	background: white;
+	overflow: hidden;
 }
 
-.headers h3 {
+.headers {
+	overflow: hidden;
+	h3 {
+		width: 50%;
+		float: left;
+		text-align: center;
+		color: #333;
+		box-sizing: border-box;
+		padding: 0 20px;
+		position: relative;
+		z-index: 2;
+	    padding: 12px 10px;
+	    margin: 0;
+	    // @include fs-bodyHeading(3);
+	    @include f-headline;
+	    font-size: 18px;
+	    line-height: 22px;
+		&:first-child {
+			text-align: right;
+			border-right: 1px solid #dfdfdf;
+		}
+		&:nth-child(2) {
+			text-align: left;
+			border-left: 1px solid #dfdfdf;
+			margin-left: -1px;
+		}
+	}
+}
+
+.parliament-container {
+	overflow: hidden;
 	width: 50%;
-	float: left;
-	text-align: center;
-	color: #333;
-	box-sizing: border-box;
-	padding: 0 20px;
-	position: relative;
-	z-index: 2;
-    border-bottom: 1px solid #dfdfdf;
-    padding-bottom: 12px;
-	&:first-child {
-		text-align: right;
-	}
-	&:nth-child(2) {
-		text-align: left;
-	}
 }
 
 .parliament {
 	padding: 0 20px;
-	.show-type-descriptions & {
-		opacity: 0.2;
+	width: 100%;
+	box-sizing: border-box;
+	float: left;
+}
+
+.parliament-container,
+.calendar-container {
+	margin-top: 24px;
+}
+
+.calendar-container {
+	width: 50%;
+	box-sizing: border-box;
+	float: right;
+	padding-left: 20px;
+	// .calendar__date:first-child {
+	// 	border: 0;
+	// }
+}
+
+.section-header {
+    padding: 12px 0;
+	margin: 0;
+	border-top: 1px solid #4bc6df;
+	margin-bottom: 12px;
+	a {
+		font-size: 14px;
+		color: #005689;
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 }
 
 .stages {
 	margin: 0;
 	padding: 0;
+    padding-top: 12px;
 	list-style-type: none;
 	text-indent: 0;
 	position: relative;
 	background: #fff;
+    border-top: 1px solid #bdbdbd;
+    width: calc(100% - 40px);
+    margin: 0 20px;
 	&:after {
 		content: '';
 		display: block;
@@ -54,6 +106,7 @@
 		position: absolute;
 		left: 50%;
 		top: 0;
+		margin-left: -1px;
 		border-right: 1px solid #dfdfdf;
 		height: 100%;
 		z-index: 1;
@@ -86,11 +139,9 @@
     color: #333;
     @include fs-textSans(3);
 	position: absolute;
-	// left: 0;
-	// top: 200px;
 	top: 80px;
     transform: rotate(90deg);
-    transform-origin: 0%;
+    transform-origin: 0.5px;
     z-index: 2;
     > span {
     	display: block;
@@ -106,15 +157,10 @@
 .flow--lords {
 	right: 0;
 	transform: rotate(-90deg);
-	transform-origin: 100%;
+	transform-origin: calc(100% - 0.5px);
 }
 .arrow {
-    // width: auto;
-    // left: 0;
-    // top: 0;
-    // margin-left: 10px;
-	// z-index: 2;
-	border-top: 1px solid #bdbdbd;
+	border-top: 1px solid #767676;
 	color: #767676;
 	display: block;
 	position: relative;
@@ -132,7 +178,8 @@
     	right: -8px;
     }
     .flow--lords & {
-		left: 0;
+		left: -2px;
+    	top: -11px;
 		transform: rotate(180deg);
 	}
 }
@@ -146,7 +193,7 @@
 	position: absolute;
 	left: 0;
 	right: 0;
-	width: 132px;
+	width: 100px;
 	border-radius: 4px;
 	z-index: 2;
 }
@@ -165,7 +212,7 @@
 	margin: 0;
 	padding: 0;
 	text-indent: 0;
-	width: calc(50% - (132px / 2));
+	width: calc(50% - (100px / 2));
 	box-sizing: border-box;
 	padding: 6px 12px;
 	min-height: 32px;
@@ -173,12 +220,12 @@
 
 .tooltip {
 	position: absolute;
-	max-width: 400px;
 	z-index: 3;
 	background: white;
+    // border-radius: 4px;
+	max-width: 400px;
     padding: 6px 10px;
     border: 1px solid #dfdfdf;
-    // border-radius: 4px;
 	font-size: 13px;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.05);
 	@include fs-textSans(4);
@@ -347,7 +394,7 @@ $billTypes: ("Government", "Hybrid", "Ten Minute Rule", "Ballot", "HoL Private",
     width: calc(100% - 40px);
     left: 0;
     z-index: 8;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.95);
     padding: 12px 0;
     margin: 0 20px;
     display: none;
@@ -371,5 +418,22 @@ $billTypes: ("Government", "Hybrid", "Ten Minute Rule", "Ballot", "HoL Private",
 	}
 	p {
 		@include fs-bodyCopy(2);
+	}
+}
+
+.queenspeech-container {
+	display: block;
+	clear: both;
+	margin-top: 48px;
+	.queenspeech__bills {
+		-webkit-columns: 2;
+	}
+}
+
+.show-type-descriptions {
+	.queenspeech-container,
+	.parliament-container,
+	.calendar-container {
+		visibility: hidden;
 	}
 }

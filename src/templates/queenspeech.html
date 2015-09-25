@@ -1,0 +1,11 @@
+<div class="queenspeech">
+    <div class="tooltip-container"></div>
+    <ul class="queenspeech__bills">
+        {{~it.bills :bill:i}}
+        <li class="queenspeech__bill" billid="{{=bill.id}}">
+            <div class="progressbar"><span style="width: {{=bill.perc}}%;"></span></div>
+            <div class="queenspeech__bill-name">{{=bill.name}}</div>
+        </li>
+        {{~}}
+    </ul>
+</div>

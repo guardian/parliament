@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" type="text/css" href="build/queenspeech.css"> -->
+        <style type="text/css">
+          body, html {
+              background-color: #fff;
+              margin: 0;
+              padding: 0;
+          }
+        </style>
+        <script src="jspm_packages/system.js"></script>
+        <script src="src/js/config.js"></script>
+        <script src="build/queenspeech.js"></script>
+        <title></title>
+    </head>
+    <body>
+      <h2 class="main-header">Conservative manifesto 2015-2016 <span id="on-date"></span></h2>
+      <div id="queenspeech-container"></div>
+
+        <script>
+            System.import('src/js/queenspeech').then(function(main) {
+              main.init();
+            })
+        </script>
+    </body>
+</html>
