@@ -27,6 +27,7 @@ module.exports = function(grunt) {
                     'build/main.css': 'src/css/main.scss',
                     'build/bill.css': 'src/css/bill.scss',
                     'build/division.css': 'src/css/division.scss',
+                    'build/divisions.css': 'src/css/divisions.scss',
                     'build/rebels.css': 'src/css/rebels.scss',
                     'build/calendar.css': 'src/css/calendar.scss',
                     'build/state.css': 'src/css/state.scss',
@@ -48,6 +49,9 @@ module.exports = function(grunt) {
             },
             division: {
                 command: './node_modules/.bin/jspm bundle -m src/js/division build/division.js'
+            },
+            divisions: {
+                command: './node_modules/.bin/jspm bundle -m src/js/divisions build/divisions.js'
             },
             bill: {
                 command: './node_modules/.bin/jspm bundle -m src/js/billembed build/billembed.js'
@@ -76,7 +80,7 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: '.',
                         src: [
-                            'data/bills/*', 'data/divisions/*', 'data/membersfordivisions.json'
+                            'data/bills/*', 'data/divisions/*', 'data/membersfordivisions.json', 'data/divisions.json'
                         ],
                         dest: 'embed/parliament/',
                         params: { CacheControl: 'max-age=60' }
@@ -98,6 +102,8 @@ module.exports = function(grunt) {
                             // division
                             'build/division.css', 'build/division.js', 'build/division.js.map', 'division.html',
                             'data/membersfordivisions.json',
+                            // divisions
+                            'build/divisions.css', 'build/divisions.js', 'build/divisions.js.map', 'divisions.html',
                             // bill
                             'build/bill.css', 'build/billembed.js', 'build/billembed.js.map', 'bill.html',
                             // tool

@@ -1,0 +1,43 @@
+<div class="divisions">
+
+	<div class="popup">
+		<div class="popup__content">
+			<input class="popup__url" type="text" readonly onfocus="this.select();" />
+			<label>
+				<span>Title</span>
+				<input class="popup__title" type="text"/>
+			</label>
+			<label>
+				<span>Description</span>
+				<textarea class="popup__desc" placeholder="optional description…"></textarea>
+			</label>
+
+			<div class="popup__refreshtimer popup__refreshtimer--refreshing"><div></div></div>
+			<div class="popup__iframe-container"></div>
+		</div>
+	</div>
+
+
+	<h2>Divisions</h2>
+
+	<ul class="division-list">
+	{{~ it.divisions :division:i}}
+		<li class="division">
+			<a class="division__link" href="https://interactive.guim.co.uk/embed/parliament/division.html?id={{=division.id}}" target="_blank">
+				<div class="division__date">{{=division.formattedDate}}</div>
+				<div class="division__time">{{=division.time}}</div>
+				<div class="division__house division__house--{{=division.house.toLowerCase()}}">{{=division.house}}</div>
+				<div class="division__votes">
+					<span class="division__votecount division__votecount--aye
+							{{?division.Aye > division.Noe}} division__votecount--win{{?}}">{{=division.Aye}}</span>
+					<span class="division__votecount-divider">/</span>
+					<span class="division__votecount division__votecount--no
+							{{?division.Noe > division.Aye}} division__votecount--win{{?}}">{{=division.Noe}}</span>
+				</div>
+				<div class="division__title">{{=division.title}}</div>
+			</a>
+		</li>
+	{{~}}
+	</ul>
+
+</div>

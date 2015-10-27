@@ -1,0 +1,184 @@
+@import 'font';
+@import 'mq';
+
+.divisions {
+	max-width: 900px;
+	margin: auto;
+	box-sizing: border-box;
+}
+
+.division-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	@include fs-textSans(3);
+}
+
+.division {
+}
+
+.division__house,
+.division__votes,
+.division__date,
+.division__votecount,
+.division__time,
+.division__votecount-divider,
+.division__title {
+	display: inline-block;
+	color: #333;
+	vertical-align: top;
+}
+
+.division__title {
+	max-width: calc(100% - 330px);
+	white-space: normal;
+}
+
+.division__house {
+	width: 80px;
+	box-sizing: border-box;
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.division__house--commons {
+	color: #2B6D54;
+}
+
+.division__house--lords {
+	color: #B12D32;
+}
+
+.division__votes {
+	padding: 0 10px;
+}
+
+.division__date {
+	width: 130px;
+    font-size: 15px;
+    font-family: "Guardian Egyptian Web";
+    font-weight: 400;
+    text-indent: 5px;
+}
+
+.division__time {
+	width: 40px;
+}
+
+.division__votecount-divider {
+	width: 10px;
+	text-align: center;
+}
+
+.division__votecount {
+	display: inline-block;
+	width: 24px;
+	text-align: right;
+}
+
+.division__votecount--aye {
+	color: #4a7801;
+}
+
+.division__votecount--no {
+	color: #d61d00;
+}
+
+.division__votecount--win {
+	font-weight: 900;
+}
+
+.division__link {
+	display: block;
+	text-decoration: none;
+	padding: 5px 0;
+	white-space: nowrap;
+
+	.division:nth-child(2n) & {
+		background-color: #f7f7f7;
+	}
+
+	&:hover {
+		background-color: #efefef !important;
+	}
+}
+
+.popup {
+	display: none;
+	position: fixed;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+}
+
+.popup__iframe-container {
+	background: url(../src/img/loading.gif) center no-repeat;
+	background-size: 32px;
+	min-height: 120px;
+	margin-top: 24px;
+	position: relative;
+}
+
+.popup__content {
+	background-color: white;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	width: 620px;
+	height: 400px;
+	padding: 12px 20px;
+	margin: auto;
+	iframe {
+		width: 620px;
+		margin: 0;
+		border: 0;
+	}
+	> label {
+		display: block;
+		margin-bottom: 6px;
+		color: #333;
+		> span {
+			display: inline-block;
+			vertical-align: top;
+			width: 100px;
+			@include fs-headline(2);
+		}
+		> input, > textarea {
+		    width: calc(100% - 100px);
+		    box-sizing: border-box;
+		}
+		> input {
+			@include fs-bodyHeading(2);
+			line-height: 18px;
+		}
+		> textarea {
+			@include fs-textSans(3);
+		}
+	}
+}
+
+.popup__url {
+	padding: 1px 2px;
+	width: 100%;
+	margin-bottom: 24px;
+}
+
+.divisions--popup {
+	.popup {
+		display: block;
+	}
+}
+
+.popup__refreshtimer {
+	width: 100%;
+	margin-top: 6px;
+	> div {
+		background-color: #ccc;
+		height: 1px;
+		width: 0;
+	}
+}
+
+.popup__refreshtimer--refreshing > div {
+	width: 100%;
+	transition: width 1.7s linear;
+	transition-delay: 0.3s;
+}
