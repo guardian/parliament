@@ -49,6 +49,13 @@ function find(arr, fn) {
     }
 }
 
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 function fetchJson(url, callback) {
     reqwest({ url: url, type: 'json', contentType: 'application/json' })
         .then(json => callback(null, json))
@@ -65,8 +72,6 @@ export function init({el}) {
             .defer(fetchJson, `${protocol}interactive.guim.co.uk/docsdata/1K9vpQXAlfs83kU0lUBAsX_UsB_EcTaQWiOWs8XyuFNI.json`)
             .await((error, division, members, metaSheet) => {
                 if (error) return console.log(error);
-
-                console.log(division.AyeMembers.length, division.NoeMembers.length);
 
                 var meta = find(metaSheet.sheets.divisions, d => d.id == division.Id);
 
@@ -117,10 +122,13 @@ export function init({el}) {
 
                 }
 
+                var titleOverride = getParameterByName('title');
+                var descOverride = getParameterByName('desc');
+
                 el.innerHTML = renderTemplate({
                     division: division,
-                    title: meta ? meta.title : division.DebateSection.trim(),
-                    desc: meta ? meta.desc : null,
+                    title: titleOverride || (meta ? meta.title : division.DebateSection.trim()),
+                    desc: descOverride || (meta ? meta.desc : null),
                     height: Math.max(division.AyeCount, division.NoeCount, division.AyeMembers.length, division.NoeMembers.length),
                     voteCounts: voteCounts,
                     parties: parties,
