@@ -1,0 +1,356 @@
+@import 'font';
+@import 'mq';
+@import "progressbar";
+
+.division {
+	max-width: 620px;
+	box-sizing: border-box;
+	padding-bottom: 12px;
+	overflow: hidden;
+}
+
+.division__house {
+    color: #999;
+    margin: 0;
+    @include fs-bodyHeading(2);
+}
+
+@media (min-width: 620px) {
+	.division__house {
+		float: left;
+		line-height: 28px;
+		margin-right: 6px;
+	}
+}
+
+.division__title {
+	margin: 0;
+	line-height: 32px;
+	@include fs-bodyHeading(3);
+    border-bottom: 1px solid #dfdfdf;
+    margin-bottom: 6px;
+}
+
+.division__meta {
+	@include fs-textSans(1);
+	color: #999;
+	margin-bottom: 6px;
+}
+
+.division_desc {
+	@include fs-textSans(3);
+	color: #333;
+}
+
+.division__prevote {
+	font-size: 14px;
+}
+
+.division__votes {
+	padding: 12px 0;
+	padding-top: 6px;
+}
+
+.division__vote-hover {
+	$c-tooltipbg: rgba(255, 255, 255, 0.98);
+	position: absolute;
+	display: none;
+	background: $c-tooltipbg;
+	padding: 2px 5px;
+	padding-top: 3px;
+	@include fs-textSans(2);
+    margin-left: -11px;
+    z-index: 1;
+    color: #333;
+    box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.3);
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    strong {
+    	font-weight: 500;
+    }
+	&:before {
+	    content: '';
+	    display: block;
+	    position: absolute;
+	    top: 100%;
+	    width: 0;
+	    left: 4px;
+	    border: 7px solid #ddd;
+	    border-right-color: transparent;
+	    border-bottom-color: transparent;
+	    border-left-color: transparent;
+    }
+	&:after {
+	    content: '';
+	    display: block;
+	    position: absolute;
+	    top: 100%;
+	    width: 0;
+	    border: 6px solid $c-tooltipbg;
+	    left: 5px;
+	    border-right-color: transparent;
+	    border-bottom-color: transparent;
+	    border-left-color: transparent;
+    }
+}
+
+.division__vote-hover--flipped {
+	margin-left: 11px;
+	&:before {
+		left: auto;
+		right: 4px;
+	}
+	&:after {
+		left: auto;
+		right: 5px;
+	}
+}
+
+.division__vote-hover--show {
+	display: block;
+}
+
+$votestack-height: 36px;
+
+.votestack {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	height: $votestack-height;
+	position: relative;
+	margin: auto;
+	overflow: auto;
+}
+
+.votestack__segment {
+	position: relative;
+	opacity: 0.9;
+	height: 100%;
+	float: left;
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.vote {
+	position: relative;
+	box-sizing: border-box;
+}
+
+.division__rebels {
+	clear: both;
+}
+
+.division__rebel-bars {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	height: 36px;
+	li {
+		width: 12px;
+		margin-right: 6px;
+	}
+}
+
+// $vote-meta-space: 36px;
+// .vote[vote='Aye'] {
+// 	margin-top: $vote-meta-space;
+// 	.vote__meta { top: -$vote-meta-space; }
+// 	margin-bottom: 6px;
+// }
+
+// .vote[vote='Noe'] {
+// 	margin-bottom: $vote-meta-space;
+// 	.vote__meta { bottom: -$vote-meta-space; }
+// }
+
+// .vote__meta {
+// 	position: absolute;
+// }
+
+.vote[vote='Aye'] {
+	margin-bottom: 6px;
+}
+.vote__meta {
+	float: right;
+	margin-left: 10px;
+    width: 72px;
+    text-align: right;
+}
+
+.vote__type,
+.vote__count {
+	text-align: center;
+	@include fs-bodyCopy(2);
+	color: #222;
+	line-height: $votestack-height;
+	// line-height: $vote-meta-space;
+}
+
+.vote--win  {
+	.vote__meta { font-weight: bold; }
+}
+
+.vote:not(.vote--win) {
+	.votestack {
+		// opacity: 0.8;
+	}
+	// &:hover .votestack { opacity: 1.0 }
+}
+
+.vote__count {
+	font-family: $f-serif-headline;
+	@include fs-bodyCopy(3, true);
+}
+.vote__type {
+	margin-right: 10px
+}
+
+$partyColors: (
+	Conservative:    #005789,
+	Labour:    #E31F26,
+	"Labour (Co-op)":    #E31F26,
+	"Scottish National Party":    #FCDD03,
+	"Liberal Democrat": #FFB900,
+	"Green Party":  #33A22B,
+	"Democratic Unionist Party":    #99002e, //#D46A4C,
+	"UK Independence Party":   #7D0069,
+	"Social Democratic & Labour Party":   #008587, //#99FF66,
+	"Ulster Unionist Party": #B3B3B4,
+	"Independent":    #B3B3B4, //guessed
+	"Plaid Cymru":     #868686,
+
+	"Crossbench": #767676,
+	"Non-affiliated": #767676,
+	"Bishops": #ffffff,
+	"Independent Labour": #E31F26,
+
+	"Unknown": #767676,
+
+	// speaker:    #005789,
+	// others: #B3B3B4,
+	// sf:     #7eaa58, //#008800,
+	// pending:    #dfdfdf
+);
+
+@each $party, $color in $partyColors {
+	.division__rebel-bar[party='#{$party}'],
+    .votestack__segment[party='#{$party}'] {
+        background-color: $color;
+    }
+
+
+}
+
+.division__stats {
+	font-size: 14px;
+}
+.division__stat {
+	height: 24px;
+	display: inline-block;
+	margin-right: 20px;
+	> label:first-child {
+		display: inline-block;
+		width: 90px;
+	}
+	> span:nth-child(2) {
+		display: inline-block;
+		width: 30px;
+	}
+	.progressbar {
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 10px;
+		margin-top: -3px;
+		> span:first-child {
+			background-color: #767676;
+		}
+	}
+}
+
+
+.rebels {
+	border-top: 1px solid #dfdfdf;
+	max-height: 200px;
+	box-sizing: border-box;
+	overflow-y: scroll;
+	// margin: 0 -10px;
+	// padding: 0 10px;
+}
+
+.rebel-expand {
+	color: #bdbdbd;
+	@include fs-bodyCopy(1);
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	margin-left: 10px;
+	border: 0;
+	outline: none;
+	cursor: pointer;
+	background-color: transparent;
+	&:hover {
+		color: #767676;
+		text-decoration: underline;
+	}
+	display: none;
+}
+.rebels-header {
+		@include fs-bodyHeading(2);
+		margin: 0;
+		margin-bottom: 6px;
+		> span:first-child {
+			font-weight: normal;
+			color: #767676;
+		}
+	}
+
+.party-rebels {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	@include fs-textSans(3);
+	// display: none;
+
+	.rebels--show & {
+		display: block;
+	}
+}
+
+.party-rebel--haspost {
+	font-weight: bold;
+}
+
+.party-rebel {
+	@media (min-width: 380px) {
+		display: inline-block;
+		width: 50%;
+	}
+	@media (min-width: 620px) {
+		width: 33.3%;
+	}
+	a {
+		color: #333;
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+			color: black;
+		}
+	}
+}
+
+.party-header {
+	@include fs-bodyHeading(1);
+	margin: 12px 0;
+	span {
+		font-weight: normal;
+		color: #767676;
+	}
+}
+
+.no-rebels {
+	@include fs-bodyHeading(2);
+	margin: 0;
+	color: #bdbdbd;
+}
