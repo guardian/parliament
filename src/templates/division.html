@@ -44,19 +44,7 @@
 	</div>
 	{{?}}
 
-	{{?it.rebels && it.rebels.length === 'asdf'}}
-	<div class="division__rebels">
-		<h3>Rebels</h3>
-		<span>{{=it.rebelCount}}</span>
-		<ul class="division__rebel-bars">
-			{{~ it.rebels :rebel:i}}
-			<li class="division__rebel-bar" party="{{=rebel.party}}" style="height: {{=(rebel.count / it.rebelHeight) * 100}}%"></li>
-			{{~}}
-		</ul>
-	</div>
-	{{?}}
-
-	{{? it.division.House !== 'Lords' && it.rebels }}
+	{{? it.rebels }}
 		{{? it.rebelCount }}
 		<h3 class="rebels-header">Rebels <span>({{=it.rebelCount}})</span> <button class="rebel-expand">click to expand</button></h3>
 		<div class="rebels">

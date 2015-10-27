@@ -99,8 +99,11 @@ export function init({el}) {
                 var membersById = {};
                 [].concat(division.AyeMembers,division.NoeMembers).forEach(member => membersById[member.Id] = member)
 
-                if (division.house !== 'Lords') {
-                    var rebels = {}
+                var rebels,
+                    showRebels = /commons/i.test(division.house);
+
+                if (showRebels) {
+                    rebels = {}
                     rebelOrder.forEach(party => {
                         if (division.rebels[party])
                             rebels[party] = division.rebels[party]
