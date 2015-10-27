@@ -1,0 +1,19 @@
+$progressbar-size: 70px;
+
+.progressbar {
+	width: $progressbar-size;
+	height: 14px;
+	background: #dfdfdf;
+	border-radius: 4px;
+	position: relative;
+	overflow: hidden;
+
+	> span {
+		display: inline-block;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: #005689;
+	}
+}

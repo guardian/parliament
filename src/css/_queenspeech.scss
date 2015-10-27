@@ -1,4 +1,4 @@
-$progressbar-size: 70px;
+@import "progressbar";
 
 .queenspeech--fade {
     > :not(.tooltip-container) {
@@ -31,32 +31,16 @@ $progressbar-size: 70px;
 	@include fs-bodyCopy(1);
 }
 
-.progressbar {
-	// display: inline-block;
-	// vertical-align: middle;
-	float: left;
-	width: $progressbar-size;
-	height: 14px;
-	// border: 1px solid #333;
-	background: #dfdfdf;
-	border-radius: 4px;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	margin: auto;
-	overflow: hidden;
-	> span {
-		display: inline-block;
-		height: 100%;
-		position: absolute;
-		left: 0;
-		top: 0;
-		background: #005689;
-	}
-}
-
 .queenspeech__bill:after {
     content: '';
     clear: both;
     display: block;
+}
+
+.queenspeech .progressbar {
+	position: absolute;
+	float: left;
+	top: 0;
+	bottom: 0;
+	margin: auto;
 }
