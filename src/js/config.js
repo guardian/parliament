@@ -29,6 +29,7 @@ System.config({
     "hammer": "github:hammerjs/hammer.js@2.0.4",
     "json": "github:systemjs/plugin-json@0.1.0",
     "lodash": "npm:lodash@3.10.1",
+    "mbostock/queue": "github:mbostock/queue@1.0.7",
     "olado/doT": "github:olado/doT@1.0.1",
     "reqwest": "github:ded/reqwest@2.0.3",
     "samsonjs/strftime": "github:samsonjs/strftime@0.9.2",

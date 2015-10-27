@@ -1,0 +1,82 @@
+<div class="division">
+	<h3 class="division__house">House of {{=it.division.House}}</h3>
+	<h3 class="division__title">{{=it.title}}</h3>
+	<div class="division__meta">Vote at {{=it.dateString}}</div>
+
+	{{? it.desc }}<div class="division_desc">{{=it.desc}}</div>{{?}}
+
+	<div class="division__votes">
+		<div class="division__vote-hover"></div>
+		{{~['Aye', 'Noe'] :vote:i}}
+		<div class="vote {{? vote === it.winningVote}}vote--win{{?}}" vote="{{=vote}}">
+			<div class="vote__meta">
+				<span class="vote__type">{{=vote === 'Noe' ? 'No' : vote}}</span>
+				<span class="vote__count">{{=it.division[vote + 'Count']}}</span>
+			</div>
+			<ul class="votestack">
+				{{~it.parties :party:j}}
+				<li class="votestack__segment" party="{{=party}}" vote="{{=vote}}"
+					style="width: {{=(it.voteCounts[party][vote] / it.height) * 100}}%;"></li>
+				{{~}}
+			</ul>
+		</div>
+		{{~}}
+	</div>
+
+
+	{{? 1 === 2 }}
+	<div class="division__stats">
+		<div class="division__stat">
+			<div class="progressbar"><span style="width: {{=((it.turnout / 650)*100).toFixed(1)}}%;"></span></div>
+			<!-- <span>{{=it.turnout}}</span> -->
+			<label>High turnout</label>
+		</div>
+		<div class="division__stat">
+			<div class="progressbar"><span style="width: {{=((it.rebelCount / it.turnout)*100).toFixed(1)}}%;"></span></div>
+			<label>
+				{{? it.rebelCount === 0}}No rebels
+				{{?? it.rebelCount < 10}}Low rebel count
+				{{??}}High rebel count
+				{{?}}
+			</label>
+			<!-- <span>{{=it.rebelCount}}</span> -->
+		</div>
+	</div>
+	{{?}}
+
+	{{?it.rebels && it.rebels.length === 'asdf'}}
+	<div class="division__rebels">
+		<h3>Rebels</h3>
+		<span>{{=it.rebelCount}}</span>
+		<ul class="division__rebel-bars">
+			{{~ it.rebels :rebel:i}}
+			<li class="division__rebel-bar" party="{{=rebel.party}}" style="height: {{=(rebel.count / it.rebelHeight) * 100}}%"></li>
+			{{~}}
+		</ul>
+	</div>
+	{{?}}
+
+	{{? it.division.House !== 'Lords' && it.rebels }}
+		{{? it.rebelCount }}
+		<h3 class="rebels-header">Rebels <span>({{=it.rebelCount}})</span> <button class="rebel-expand">click to expand</button></h3>
+		<div class="rebels">
+			{{~ it.rebelOrder :party:i}}
+				{{? it.rebels[party] && it.rebels[party].length }}
+					<h4 class="party-header">{{=party}} <span>({{=it.rebels[party].length}})</span></h4>
+					<ul class="party-rebels">
+					{{~it.rebels[party] :rebel:j}}
+						<li class="party-rebel {{? it.members[rebel.Id].post }}party-rebel--haspost{{?}}">
+							<a href="http://myparliament.info/Member/{{=rebel.Id}}" target="_blank">{{=it.members[rebel.Id].name}}</a>
+						</li>
+					{{~}}
+					</ul>
+				{{?}}
+			{{~}}
+		{{??}}
+			<h3 class="no-rebels">No rebel voters</h3>
+		{{?}}
+	{{?}}
+</div>
+
+
+</div>

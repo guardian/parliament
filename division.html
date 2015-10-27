@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="build/division.css">
+        <style type="text/css">
+          html, body, .element-interactive {
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+        <script src="//interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js" async></script>
+        <script src="jspm_packages/system.js"></script>
+        <script src="src/js/config.js"></script>
+        <script src="build/division.js"></script>
+        <title></title>
+    </head>
+    <body>
+        <div id="division-container"></div>
+        <script type="text/javascript">
+          System.import('src/js/division').then(function(division) {
+              division.init({el: document.getElementById('division-container')});
+          })
+        </script>
+    </body>
+</html>

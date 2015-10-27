@@ -26,6 +26,8 @@ module.exports = function(grunt) {
                     'build/tool.css': 'src/css/tool.scss',
                     'build/main.css': 'src/css/main.scss',
                     'build/bill.css': 'src/css/bill.scss',
+                    'build/division.css': 'src/css/division.scss',
+                    'build/rebels.css': 'src/css/rebels.scss',
                     'build/calendar.css': 'src/css/calendar.scss',
                     'build/state.css': 'src/css/state.scss',
                     'build/queenspeech.css': 'src/css/queenspeech.scss',
@@ -44,6 +46,9 @@ module.exports = function(grunt) {
             queenspeech: {
                 command: './node_modules/.bin/jspm bundle -m src/js/queenspeech build/queenspeech.js'
             },
+            division: {
+                command: './node_modules/.bin/jspm bundle -m src/js/division build/division.js'
+            },
             bill: {
                 command: './node_modules/.bin/jspm bundle -m src/js/billembed build/billembed.js'
             },
@@ -59,15 +64,26 @@ module.exports = function(grunt) {
                 accessKeyId: '<%= aws.AWSAccessKeyId %>',
                 secretAccessKey: '<%= aws.AWSSecretKey %>',
                 region: 'us-east-1',
-                uploadConcurrency: 5, // 5 simultaneous uploads
-                downloadConcurrency: 5, // 5 simultaneous downloads
+                uploadConcurrency: 10, // 5 simultaneous uploads
+                downloadConcurrency: 10, // 5 simultaneous downloads
                 debug: grunt.option('dry'),
-                bucket: 'gdn-cdn'
+                bucket: 'gdn-cdn',
+                differential: true
+            },
+            data: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '.',
+                        src: [
+                            'data/bills/*', 'data/divisions/*', 'data/membersfordivisions.json'
+                        ],
+                        dest: 'embed/parliament/',
+                        params: { CacheControl: 'max-age=60' }
+                    }
+                ]
             },
             production: {
-                options: {
-                    differential: true
-                },
                 files: [
                     {
                         expand: true,
@@ -79,8 +95,11 @@ module.exports = function(grunt) {
                             'build/state.css', 'build/state.js', 'build/state.js.map', 'state.html',
                             // queenspeech
                             'build/queenspeech.css', 'build/queenspeech.js', 'build/queenspeech.js.map', 'queenspeech.html',
+                            // division
+                            'build/division.css', 'build/division.js', 'build/division.js.map', 'division.html',
+                            'data/membersfordivisions.json',
                             // bill
-                            'build/bill.css', 'build/billembed.js', 'build/billembed.js.map', 'bill.html', 'data/bills/*',
+                            'build/bill.css', 'build/billembed.js', 'build/billembed.js.map', 'bill.html',
                             // tool
                             'build/tool.css', 'build/tool.js', 'build/tool.js.map', 'index.html'
                         ],
@@ -116,6 +135,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('build', ['clean', 'sass'])
-    grunt.registerTask('deploy', ['build', 'shell', 'aws_s3']);
+    grunt.registerTask('deploy', ['build', 'shell', 'aws_s3:production']);
+    grunt.registerTask('deploydata', ['aws_s3:data']);
     grunt.registerTask('default', ['build', 'connect', 'watch']);
 }
