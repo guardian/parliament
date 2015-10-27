@@ -105,7 +105,7 @@ export function init({el}) {
                 [].concat(division.AyeMembers,division.NoeMembers).forEach(member => membersById[member.Id] = member)
 
                 var rebels,
-                    showRebels = /commons/i.test(division.House);
+                    showRebels = false; // commons/i.test(division.House); /*until they fix their API*/
                 if (showRebels) {
                     rebels = {}
                     rebelOrder.forEach(party => {
